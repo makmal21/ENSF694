@@ -13,7 +13,12 @@ public class SearchApp {
 	private Scanner reader = new Scanner(System.in);
 	
 	
-	//Original Linear Search method
+	/**
+	 * Linear Search method 
+	 * @param array
+	 * @param key
+	 * @return int
+	 */
 	static int linearSearch(int[] array, int key) {
 		
 		for(int i = 0; i < array.length; i++) {
@@ -25,10 +30,10 @@ public class SearchApp {
 	}
 	
 	/**
-	 * Improved Linear Search for Q3
+	 * Improved Linear Search method for Q3
 	 * @param array
 	 * @param key
-	 * @return
+	 * @return int
 	 */
 	static int linearSearchQ3(int[] array, int key) {
 		
@@ -49,6 +54,13 @@ public class SearchApp {
 		return -1;
 	}
 	
+	/**
+	 * Interpolation Search method
+	 * 
+	 * @param array
+	 * @param key
+	 * @return int
+	 */
 	static int interpolationSearch(int[] array, int key) {
 		
 		int low = 0, mid, high = array.length-1;
@@ -67,7 +79,10 @@ public class SearchApp {
 		return -1;
 	}
 	
-	
+	/**
+	 * Prompt user for inputs, store elements in array 
+	 * Call Linear and Interpolation Search methods
+	 */
 	public void run() {
 			
 		//Prompt user for the number of elements in the array
@@ -77,7 +92,9 @@ public class SearchApp {
 		//Prompt user for the elements of the array
 		System.out.println("Enter the elements of the array: ");
 		
+		//Set size of int array 
         int [] array = new int[elements];
+        //add values entered to array
 		for(int i = 0; i < elements; i++) {
 			array[i] = reader.nextInt();
 		}
@@ -87,8 +104,8 @@ public class SearchApp {
 		int key = reader.nextInt();
 		
 		Arrays.sort(array); //Sort array 
-		//Linear Search
 		
+		//Linear Search
 		long LinearStartTime = System.nanoTime();
 		
 		if (linearSearch(array, key) == -1) {
@@ -119,7 +136,6 @@ public class SearchApp {
 		long Linear2TotalTime = Linear2EndTime - Linear2StartTime;
 		
 		
-		
 		//Interpolation Search
 		long interStartTime = System.nanoTime();
 		if (interpolationSearch(array, key) == -1) {
@@ -132,9 +148,10 @@ public class SearchApp {
 		long interTotalTime = interEndTime - interStartTime;
 		
 		
-		//Q2: Compare runtime for Linear Search vs. Interpolation Search using nanoTime. 
-		//if the search key is in the beginning of the array Linear Search is faster then Interpolation
-		//if the search key is at the end of the array Interpolation Search is faster than Linear 
+		//Q2: Compare runtime for Linear Search vs. Interpolation Search using nanoTime(). 
+		//Interpolation Search performed better then the Linear Search as it took less time. 
+		//This is because Interpolation Search divides the array at the probe position continuously 
+		//until it finds the key whereas Linear search goes through every single item in the array.
 		System.out.println("Time for Linear Search in ns : " +LinearTotalTime); 
 		System.out.println("Time for Linear Search Improved for Q3 in ns : " +Linear2TotalTime); 
 		System.out.println("Time for Interpolation Search in ns : " +interTotalTime); 
@@ -143,7 +160,6 @@ public class SearchApp {
 		int percent = (int) ((LinearTotalTime-Linear2TotalTime)*100/LinearTotalTime);
 		System.out.println("Improved by: " +percent+"%");
 		
-				
 	}
 
 	public static void main(String[] args) {
